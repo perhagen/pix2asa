@@ -1,0 +1,272 @@
+: Written by enable_15 at 00:00:00.000 UTC Mon Jan 1 2024
+!
+PIX Version 7.2(2) 
+!
+terminal width 100
+hostname fw-02
+domain-name example1.com
+enable password XXXXXXXXXXXX encrypted
+names
+name 192.0.2.2 host-003
+dns-guard
+!
+interface Ethernet0
+ nameif outside
+ security-level 0
+ ip address 172.16.0.4 255.255.255.224 
+!
+interface Ethernet1
+ nameif inside
+ security-level 100
+ ip address 192.168.0.1 255.255.255.0 
+!
+interface Ethernet1.1
+ vlan 1
+ no nameif
+ no security-level
+ no ip address
+!
+interface Ethernet1.500
+ vlan 500
+ nameif inside-1
+ security-level 50
+ ip address 192.0.2.3 255.255.255.0 
+!
+interface Ethernet2
+ no nameif
+ no shutdown
+!
+interface Ethernet2.300
+ vlan 300
+ no nameif
+ no shutdown
+!
+interface Ethernet3
+ nameif intf3
+ security-level 90
+ ip address 192.168.0.2 255.255.255.0 
+!
+interface Ethernet4
+ nameif intf4
+ security-level 8
+ ip address 172.16.0.5 255.255.255.224 
+!
+interface Ethernet5
+ description t
+ shutdown
+ nameif intf5
+ security-level 10
+ no ip address
+ management-only
+!
+passwd XXXXXXXXXXXX encrypted
+ftp mode passive
+clock timezone PST -8
+clock summer-time PDT recurring
+dns server-group DefaultDNS
+ domain-name example1.com
+same-security-traffic permit inter-interface
+access-list 101 extended permit ip any any 
+access-list 101 extended deny ip any any log 
+access-list ttt extended permit udp any any eq ntp 
+access-list ttt extended permit udp any eq ntp any 
+access-list test�ing extended permit ip any any 
+access-list tftpcap extended permit udp any any eq tftp 
+access-list tftpcap extended permit udp any eq tftp any 
+access-list intf4_access_in extended permit tcp interface intf4 eq www host 192.168.0.3 
+access-list myacl remark ma\361ana
+access-list ma\361ana remark tomorrow
+access-list outside_authentication extended permit tcp any any 
+!
+snmp-map sicmp
+ deny version 1
+!
+pager lines 24
+logging enable
+logging buffered informational
+logging user2 informational
+logging queue 0
+logging debug-trace
+logging flash-maximum-allocation 5000
+logging message 101003 level critical
+mtu outside 1500
+mtu inside 1500
+mtu inside-1 1500
+mtu intf3 1500
+mtu intf4 1500
+mtu intf5 1500
+failover
+failover lan enable
+failover lan unit primary
+failover lan interface lanFO Ethernet2
+failover key secretkey
+failover replication http
+failover link stateFo Ethernet2.300
+failover interface ip lanFO 10.0.0.3 255.255.255.248 standby 10.0.0.4
+failover interface ip stateFo 10.0.0.5 255.255.255.248 standby 10.0.0.6
+user3-interface outside
+user3-interface inside
+no user3-interface inside-1
+user3-interface intf3
+user3-interface intf4
+user3-interface intf5
+icmp unreachable rate-limit 1 burst-size 1
+icmp permit any inside
+icmp permit any intf3
+user2 image flash:/user2
+user2 location 192.0.2.4 255.255.255.255 inside
+user2 location 192.168.0.4 255.255.255.255 inside
+user2 location 192.168.0.5 255.255.255.255 inside
+user2 location 192.0.2.5 255.255.255.255 outside
+user2 location 192.0.2.3 255.255.255.255 inside
+user2 location 192.0.2.6 255.255.255.255 inside
+user2 location 192.0.2.7 255.255.255.255 inside
+user2 location 192.0.2.8 255.255.255.255 inside
+user2 location 192.0.2.9 255.255.255.255 inside
+user2 location 192.0.2.10 255.255.255.224 inside
+user2 location 192.168.0.6 255.255.255.255 inside
+user2 location 192.0.2.11 255.255.255.255 inside
+user2 location 192.168.0.3 255.255.255.255 inside
+user2 history enable
+arp timeout 14400
+global (outside) 1 interface
+global (intf4) 1 interface
+nat (inside) 1 0.0.0.0 0.0.0.0
+nat (intf3) 1 0.0.0.0 0.0.0.0
+static (inside,outside) tcp interface 15001 192.168.0.7 https netmask 255.255.255.255 
+static (inside,outside) tcp interface 15003 192.168.0.7 telnet netmask 255.255.255.255 
+static (inside,outside) tcp interface 15101 192.168.0.8 https netmask 255.255.255.255 
+static (inside,outside) tcp interface 15103 192.168.0.8 telnet netmask 255.255.255.255 
+static (inside,outside) tcp interface 15201 192.168.0.9 https netmask 255.255.255.255 
+static (inside,outside) tcp interface 15203 192.168.0.9 telnet netmask 255.255.255.255 
+static (inside,outside) tcp interface 15301 192.168.0.3 https netmask 255.255.255.255 
+static (inside,outside) tcp interface 15303 192.168.0.3 telnet netmask 255.255.255.255 
+static (inside,outside) tcp interface 15401 192.168.0.10 https netmask 255.255.255.255 
+static (inside,outside) tcp interface 15403 192.168.0.10 telnet netmask 255.255.255.255 
+static (inside,outside) tcp interface 15501 192.168.0.11 https netmask 255.255.255.255 
+static (inside,outside) tcp interface 15503 192.168.0.11 telnet netmask 255.255.255.255 
+static (inside,outside) tcp interface 15601 192.168.0.12 https netmask 255.255.255.255 
+static (inside,outside) tcp interface 15603 192.168.0.12 telnet netmask 255.255.255.255 
+static (inside,outside) tcp interface 15701 192.168.0.13 https netmask 255.255.255.255 
+static (inside,outside) tcp interface 15703 192.168.0.13 telnet netmask 255.255.255.255 
+static (intf3,outside) tcp interface 16001 192.168.0.14 https netmask 255.255.255.255 
+static (intf3,outside) tcp interface 16003 192.168.0.14 telnet netmask 255.255.255.255 
+static (intf3,outside) tcp interface 16101 192.168.0.15 https netmask 255.255.255.255 
+static (intf3,outside) tcp interface 16103 192.168.0.15 telnet netmask 255.255.255.255 
+static (intf3,outside) tcp interface 16201 192.168.0.16 https netmask 255.255.255.255 
+static (intf3,outside) tcp interface 16203 192.168.0.16 telnet netmask 255.255.255.255 
+static (intf3,outside) tcp interface 16301 192.168.0.17 https netmask 255.255.255.255 
+static (intf3,outside) tcp interface 16303 192.168.0.17 telnet netmask 255.255.255.255 
+static (inside,inside) 192.0.2.12 192.0.2.7 netmask 255.255.255.255 
+access-group 101 in interface outside
+access-group 101 out interface outside
+access-group intf4_access_in in interface intf4
+route outside 0.0.0.0 0.0.0.0 172.16.0.6 1
+timeout xlate 3:00:00
+timeout conn 1:00:00 half-closed 0:10:00 udp 0:02:00 icmp 0:00:02
+timeout sunrpc 0:10:00 h323 0:05:00 h225 1:00:00 mgcp 0:05:00 mgcp-pat 0:05:00
+timeout sip 0:30:00 sip_media 0:02:00 sip-invite 0:03:00 sip-disconnect 0:02:00
+timeout uauth 0:05:00 absolute
+aaa-server TACACS+ protocol tacacs+
+aaa-server TACACS+ host 192.0.2.3
+ timeout 5
+ key secretkey
+aaa-server RADIUS protocol radius
+username user2 password XXXXXXXXXXXX encrypted privilege 15
+username user3 password XXXXXXXXXXXX encrypted privilege 3
+username user4 password XXXXXXXXXXXX encrypted privilege 15
+username user5 password XXXXXXXXXXXX encrypted privilege 15
+username user6 password XXXXXXXXXXXX encrypted
+username user7 password XXXXXXXXXXXX encrypted privilege 3
+username user8 password XXXXXXXXXXXX encrypted privilege 9
+username user9 password XXXXXXXXXXXX encrypted privilege 15
+url-cache dst 1
+aaa authentication ssh console LOCAL 
+aaa authorization command LOCAL 
+http server enable
+http 192.0.2.4 255.255.255.255 inside
+http 0.0.0.0 0.0.0.0 inside
+http 0.0.0.0 0.0.0.0 outside
+no snmp-server location
+no snmp-server contact
+snmp-server community COMMUNITY_STRING
+snmp-server enable traps snmp authentication linkup linkdown coldstart
+tunnel-group TunnelGroup1 type ipsec-ra
+telnet 0.0.0.0 0.0.0.0 outside
+telnet 0.0.0.0 0.0.0.0 inside
+telnet timeout 1440
+ssh 0.0.0.0 0.0.0.0 outside
+ssh 0.0.0.0 0.0.0.0 inside
+ssh 0.0.0.0 0.0.0.0 inside-1
+ssh timeout 60
+console timeout 0
+dhcpd auto_config outside
+dhcpd option 2 hex 22
+dhcpd option 6 ip 192.0.2.13
+!
+!
+!
+!
+policy-map type inspect http abc
+ parameters
+  protocol-violation action drop-connection
+!
+ntp authenticate
+ntp server 172.16.0.7 source outside
+ssl encryption rc4-md5
+privilege cmd level 3 mode exec command perfmon
+privilege cmd level 3 mode exec command ping
+privilege cmd level 3 mode exec command who
+privilege cmd level 3 mode exec command logging
+privilege cmd level 3 mode exec command failover
+privilege show level 5 mode exec command running-config
+privilege show level 3 mode exec command reload
+privilege show level 3 mode exec command mode
+privilege show level 3 mode exec command firewall
+privilege show level 3 mode exec command interface
+privilege show level 3 mode exec command clock
+privilege show level 3 mode exec command dns-hosts
+privilege show level 3 mode exec command access-list
+privilege show level 3 mode exec command logging
+privilege show level 3 mode exec command ip
+privilege show level 3 mode exec command failover
+privilege show level 3 mode exec command user2
+privilege show level 3 mode exec command arp
+privilege show level 3 mode exec command route
+privilege show level 3 mode exec command ospf
+privilege show level 3 mode exec command aaa-server
+privilege show level 3 mode exec command aaa
+privilege show level 3 mode exec command crypto
+privilege show level 3 mode exec command vpn-sessiondb
+privilege show level 3 mode exec command ssh
+privilege show level 3 mode exec command dhcpd
+privilege show level 3 mode exec command vpn
+privilege show level 3 mode exec command blocks
+privilege show level 3 mode exec command uauth
+privilege show level 3 mode configure command interface
+privilege show level 3 mode configure command clock
+privilege show level 3 mode configure command access-list
+privilege show level 3 mode configure command logging
+privilege show level 3 mode configure command ip
+privilege show level 3 mode configure command failover
+privilege show level 5 mode configure command user2
+privilege show level 3 mode configure command arp
+privilege show level 3 mode configure command route
+privilege show level 3 mode configure command aaa-server
+privilege show level 3 mode configure command aaa
+privilege show level 3 mode configure command crypto
+privilege show level 3 mode configure command ssh
+privilege show level 3 mode configure command dhcpd
+privilege show level 5 mode configure command privilege
+privilege clear level 3 mode exec command dns-hosts
+privilege clear level 3 mode exec command logging
+privilege clear level 3 mode exec command arp
+privilege clear level 3 mode exec command aaa-server
+privilege clear level 3 mode exec command crypto
+privilege cmd level 3 mode configure command failover
+privilege clear level 3 mode configure command logging
+privilege clear level 3 mode configure command arp
+privilege clear level 3 mode configure command crypto
+privilege clear level 3 mode configure command aaa-server
+prompt hostname context 
+Cryptochecksum:0000000000000000000000000000000000000000

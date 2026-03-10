@@ -1,0 +1,28 @@
+interface {{ mapped }}
+{%- if logical and vlan %}
+ vlan {{ vlan }}
+{%- endif %}
+{%- if nameif %}
+ nameif {{ nameif }}
+{%- endif %}
+{%- if nameif and security_level is not none %}
+ security-level {{ security_level }}
+{%- endif %}
+{%- if ip_address and netmask %}
+ ip address {{ ip_address }} {{ netmask }}{% if standby_ip %} standby {{ standby_ip }}{% endif %}
+{%- elif dhcp %}
+ ip address dhcp{% if set_route %} setroute{% endif %}
+{%- elif pppoe %}
+ ip address pppoe{% if set_route %} setroute{% endif %}
+{%- endif %}
+{%- if mtu %}
+ mtu {{ mtu }}
+{%- endif %}
+{%- if duplex %}
+ duplex {{ duplex }}
+{%- endif %}
+{%- if speed and speed != "auto" %}
+ speed {{ speed }}
+{%- endif %}
+ {{ state }}
+!

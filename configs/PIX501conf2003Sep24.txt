@@ -1,0 +1,148 @@
+: Saved
+:
+PIX Version 6.3(1)
+interface ethernet0 auto
+interface ethernet1 100full
+nameif ethernet0 outside security0
+nameif ethernet1 inside security100
+enable password XXXXXXXXXXXX encrypted
+passwd XXXXXXXXXXXX encrypted
+hostname fw-10
+domain-name example1.com
+clock timezone PST -8
+clock summer-time PDT recurring
+fixup protocol domain 53
+fixup protocol ftp 21
+fixup protocol h323 h225 1720
+fixup protocol h323 ras 1718-1719
+fixup protocol http 80
+fixup protocol http 443
+fixup protocol icmp error
+fixup protocol ils 389
+fixup protocol rsh 514
+fixup protocol rtsp 554
+fixup protocol sip 5060
+fixup protocol sip udp 5060
+fixup protocol skinny 2000
+fixup protocol smtp 25
+fixup protocol sqlnet 1521
+no names
+name 10.0.0.7 host-005
+name 10.0.0.8 host-006
+name 10.0.0.9 host-007
+name 192.0.2.14 host-008
+name 10.0.0.17 host-009
+name 10.0.0.12 host-011
+name 10.0.0.18 host-012
+access-list outside_access_in remark Access from outside to host-005
+access-list outside_access_in permit ip any any
+access-list inside_access_in remark Allow TCP DNS queries from host-012 SPE
+access-list inside_access_in permit tcp host 10.0.0.18 any eq domain
+access-list inside_access_in remark Allow UDP DNS queries from host-012 SPE
+access-list inside_access_in permit udp host 10.0.0.18 any eq domain
+access-list inside_access_in remark host-012 SPE should not UDP to outside
+access-list inside_access_in deny udp host 10.0.0.18 any
+access-list inside_access_in remark host-012 SPE should not TCP to outside
+access-list inside_access_in deny tcp host 10.0.0.18 any
+access-list inside_access_in remark Default to let rest through.
+access-list inside_access_in permit ip 10.0.0.12 255.255.255.0 any
+access-list user10-group_splitTunnelAcl permit ip 10.0.0.12 255.255.255.0 any
+access-list inside_outbound_nat0_acl permit ip 10.0.0.12 255.255.255.0 10.0.0.13 255.255.255.248
+access-list outside_cryptomap_dyn_20 permit ip any 10.0.0.13 255.255.255.248
+pager lines 23
+logging on
+logging timestamp
+logging trap warnings
+icmp permit any unreachable outside
+icmp permit any echo-reply outside
+icmp permit any echo outside
+icmp permit 10.0.0.12 255.255.255.0 unreachable inside
+icmp permit 10.0.0.12 255.255.255.0 echo inside
+icmp permit 10.0.0.12 255.255.255.0 echo-reply inside
+mtu outside 1500
+mtu inside 1500
+ip address outside dhcp setroute retry 4
+ip address inside 10.0.0.10 255.255.255.0
+ip audit info action alarm
+ip audit attack action alarm
+ip local pool PIXLocalPool 10.0.0.15-10.0.0.20
+pdm location 10.0.0.7 255.255.255.255 inside
+pdm location 10.0.0.8 255.255.255.255 inside
+pdm location 10.0.0.10 255.255.255.255 inside
+pdm location 10.0.0.9 255.255.255.255 inside
+pdm location 192.0.2.14 255.255.254.0 outside
+pdm location 10.0.0.17 255.255.255.255 inside
+pdm location 10.0.0.12 255.255.255.0 inside
+pdm location 10.0.0.21 255.255.0.0 outside
+pdm location 10.0.0.18 255.255.255.255 inside
+pdm location 192.0.2.16 255.255.255.255 outside
+pdm location 192.0.2.15 255.255.255.255 outside
+pdm location 10.0.0.13 255.255.255.248 inside
+pdm location 10.0.0.13 255.255.255.248 outside
+pdm logging informational 200
+pdm history enable
+arp timeout 14400
+global (outside) 1 interface
+nat (inside) 0 access-list inside_outbound_nat0_acl
+nat (inside) 1 0.0.0.0 0.0.0.0 0 0 norandomseq
+static (inside,outside) tcp interface www 10.0.0.7 www netmask 255.255.255.255 0 0
+static (inside,outside) tcp interface https 10.0.0.7 https netmask 255.255.255.255 0 0
+static (inside,outside) tcp interface 3389 10.0.0.7 3389 netmask 255.255.255.255 0 0
+static (inside,outside) tcp interface 5000 10.0.0.7 5000 netmask 255.255.255.255 0 0
+access-group outside_access_in in interface outside
+access-group inside_access_in in interface inside
+timeout xlate 0:05:00
+timeout conn 1:00:00 half-closed 0:10:00 udp 0:02:00 rpc 0:10:00 h225 1:00:00
+timeout h323 0:05:00 mgcp 0:05:00 sip 0:30:00 sip_media 0:02:00
+timeout uauth 0:05:00 absolute
+aaa-server TACACS+ protocol tacacs+
+aaa-server RADIUS protocol radius
+aaa-server LOCAL protocol local
+ntp server 10.0.0.9 source inside
+ntp server 10.0.0.7 source inside prefer
+http server enable
+http 10.0.0.21 255.255.0.0 outside
+http 192.0.2.14 255.255.254.0 outside
+http 10.0.0.12 255.255.255.0 inside
+no snmp-server location
+no snmp-server contact
+snmp-server community COMMUNITY_STRING
+no snmp-server enable traps
+tftp-server inside 10.0.0.7 /
+floodguard enable
+sysopt connection permit-ipsec
+crypto ipsec transform-set ESP-3DES-MD5 esp-3des esp-md5-hmac
+crypto dynamic-map outside_dyn_map 20 match address outside_cryptomap_dyn_20
+crypto dynamic-map outside_dyn_map 20 set transform-set ESP-3DES-MD5
+crypto map outside_map 65535 ipsec-isakmp dynamic outside_dyn_map
+crypto map outside_map interface outside
+isakmp enable outside
+isakmp policy 20 authentication pre-share
+isakmp policy 20 encryption 3des
+isakmp policy 20 hash md5
+isakmp policy 20 group 2
+isakmp policy 20 lifetime 86400
+vpngroup user10-group address-pool PIXLocalPool
+vpngroup user10-group split-tunnel user10-group_splitTunnelAcl
+vpngroup user10-group idle-time 28800
+vpngroup host-013 password ********
+telnet 192.0.2.14 255.255.254.0 outside
+telnet 10.0.0.17 255.255.255.255 inside
+telnet 10.0.0.7 255.255.255.255 inside
+telnet 10.0.0.13 255.255.255.248 inside
+telnet timeout 60
+ssh 10.0.0.21 255.255.0.0 outside
+ssh 192.0.2.14 255.255.254.0 outside
+ssh 10.0.0.12 255.255.255.0 inside
+ssh timeout 5
+management-access inside
+console timeout 0
+dhcpd address 10.0.0.15-10.0.0.16 inside
+dhcpd lease 3600
+dhcpd ping_timeout 750
+dhcpd auto_config outside
+dhcpd option 150 ip 10.0.0.7 10.0.0.9
+username user10 password XXXXXXXXXXXX encrypted privilege 15
+terminal width 80
+Cryptochecksum:0000000000000000000000000000000000000000
+: end

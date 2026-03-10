@@ -1,0 +1,8 @@
+interface Ethernet0/0
+  switchport access vlan 2
+  switchport mode access
+{%- for i in range(1, 8) %}
+interface Ethernet0/{{ i }}
+  switchport access vlan 1
+  switchport mode access
+{%- endfor %}

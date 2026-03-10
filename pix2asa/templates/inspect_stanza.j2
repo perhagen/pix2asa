@@ -1,0 +1,19 @@
+policy-map type inspect dns preset_dns_map
+ parameters
+  message-length maximum {{ dns_entry.port if dns_entry else "512" }}
+policy-map global_policy
+ class inspection_default
+{%- if dns_entry and dns_entry.negated %}
+  no inspect dns preset_dns_map
+{%- else %}
+  inspect dns preset_dns_map
+{%- endif %}
+{%- for ins in inspects if ins.name != "dns" %}
+{%-   if ins.negated %}
+  no inspect {{ ins.name }}
+{%-   else %}
+  inspect {{ ins.name }}
+{%-   endif %}
+{%- endfor %}
+!
+service-policy global_policy global

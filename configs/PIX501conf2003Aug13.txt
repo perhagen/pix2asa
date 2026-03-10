@@ -1,0 +1,87 @@
+: Saved
+:
+PIX Version 6.3(1)
+interface ethernet0 auto
+interface ethernet1 100full
+nameif ethernet0 outside security0
+nameif ethernet1 inside security100
+enable password XXXXXXXXXXXX encrypted
+passwd XXXXXXXXXXXX encrypted
+hostname fw-04
+domain-name example2.com
+clock timezone PST -8
+clock summer-time PDT recurring
+fixup protocol ftp 21
+fixup protocol h323 h225 1720
+fixup protocol h323 ras 1718-1719
+fixup protocol http 80
+fixup protocol http 443
+fixup protocol icmp error
+fixup protocol ils 389
+fixup protocol rsh 514
+fixup protocol rtsp 554
+fixup protocol sip 5060
+fixup protocol sip udp 5060
+fixup protocol skinny 2000
+fixup protocol smtp 25
+fixup protocol sqlnet 1521
+names
+name 10.0.0.7 host-005
+name 10.0.0.8 host-006
+name 10.0.0.9 host-007
+name 192.0.2.14 host-008
+name 10.0.0.10 host-009
+access-list outside_access_in remark Access from outside to host-005
+access-list outside_access_in permit ip any any
+pager lines 24
+logging on
+logging timestamp
+logging trap warnings
+icmp permit any outside
+icmp permit any inside
+mtu outside 1500
+mtu inside 1500
+ip address outside dhcp setroute
+ip address inside 10.0.0.11 255.255.255.0
+ip audit info action alarm
+ip audit attack action alarm
+pdm location host-005 255.255.255.255 inside
+pdm location host-006 255.255.255.255 inside
+pdm location host-009 255.255.255.255 inside
+pdm location host-007 255.255.255.255 inside
+pdm location host-008 255.255.254.0 outside
+pdm logging informational 200
+pdm history enable
+arp timeout 14400
+global (outside) 1 interface
+nat (inside) 1 0.0.0.0 0.0.0.0 dns 0 0
+static (inside,outside) 192.0.2.15 host-005 dns netmask 255.255.255.255 0 0 norandomseq
+access-group outside_access_in in interface outside
+timeout xlate 0:05:00
+timeout conn 1:00:00 half-closed 0:10:00 udp 0:02:00 rpc 0:10:00 h225 1:00:00
+timeout h323 0:05:00 mgcp 0:05:00 sip 0:30:00 sip_media 0:02:00
+timeout uauth 0:05:00 absolute
+aaa-server TACACS+ protocol tacacs+
+aaa-server RADIUS protocol radius
+aaa-server LOCAL protocol local
+ntp server host-007 source inside
+ntp server host-005 source inside prefer
+http server enable
+http 10.0.0.12 255.255.255.0 inside
+no snmp-server location
+no snmp-server contact
+snmp-server community COMMUNITY_STRING
+no snmp-server enable traps
+floodguard enable
+telnet host-009 255.255.255.255 inside
+telnet timeout 60
+ssh timeout 5
+console timeout 0
+dhcpd address 10.0.0.15-10.0.0.16 inside
+dhcpd lease 3600
+dhcpd ping_timeout 750
+dhcpd auto_config outside
+dhcpd enable inside
+terminal width 80
+Cryptochecksum:0000000000000000000000000000000000000000
+: end

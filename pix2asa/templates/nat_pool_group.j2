@@ -1,0 +1,10 @@
+object-group network {{ name }}
+{%- for m in members %}
+{%- if m.type == "host" %}
+ network-object host {{ m.ip }}
+{%- elif m.type == "subnet" %}
+ network-object {{ m.ip }} {{ m.mask }}
+{%- else %}
+ network-object object {{ m.name }}
+{%- endif %}
+{%- endfor %}

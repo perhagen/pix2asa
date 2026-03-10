@@ -1,0 +1,419 @@
+:
+PIX Version 4.2(3)207 
+nameif ethernet0 outside security0
+nameif ethernet1 inside security100
+enable password XXXXXXXXXXXX encrypted
+passwd XXXXXXXXXXXX encrypted
+hostname fw-14
+fixup protocol ftp 21
+fixup protocol http 80
+fixup protocol h323 1720
+fixup protocol rsh 514
+fixup protocol sqlnet 1521
+no fixup protocol smtp 25
+names
+name 10.0.0.22 host-015
+name 192.0.2.17 host-016
+name 192.168.0.18 host-017
+name 192.168.0.19 host-018
+name 192.168.0.20 host-019
+name 192.168.0.21 host-020
+name 192.168.0.22 host-021
+name 192.0.2.18 host-022
+name 192.0.2.19 host-023
+name 192.0.2.20 host-024
+failover
+failover timeout 0:00:00
+failover ip address outside 192.0.2.21
+failover ip address inside 192.168.0.23
+pager lines 24
+no logging console
+logging user3 debugging
+logging buffered debugging
+logging trap debugging
+logging facility 23
+logging host inside 10.0.0.23
+interface ethernet0 100full
+interface ethernet1 100full
+ip address outside 192.0.2.22 255.255.255.240
+ip address inside 192.168.0.24 255.255.255.0
+arp timeout 14400
+global (outside) 1 192.0.2.25-192.0.2.26 netmask 255.255.255.0
+global (outside) 1 192.0.2.29-192.0.2.30 netmask 255.255.255.0
+global (outside) 1 192.0.2.33-192.0.2.34 netmask 255.255.255.0
+global (outside) 1 192.0.2.37-192.0.2.38 netmask 255.255.255.0
+global (outside) 1 192.0.2.41-192.0.2.42 netmask 255.255.255.0
+global (outside) 1 192.0.2.45-192.0.2.46 netmask 255.255.255.0
+global (outside) 1 192.0.2.49-192.0.2.50 netmask 255.255.255.0
+global (outside) 1 192.0.2.53-192.0.2.54 netmask 255.255.255.0
+global (outside) 1 192.0.2.57-192.0.2.58 netmask 255.255.255.0
+global (outside) 5 192.0.2.60-192.0.2.60 netmask 255.255.255.0
+nat (inside) 1 10.0.0.24 255.0.0.0 0 0
+nat (inside) 1 192.168.0.25 255.255.0.0 0 0
+nat (inside) 0 192.0.2.61 255.255.255.0 0 0
+static (inside,outside) 192.0.2.62 192.168.0.26 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.23 host-017 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.63 host-018 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.64 host-021 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.65 host-019 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.66 192.168.0.27 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.67 192.168.0.28 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.68 10.0.0.25 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.69 host-020 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.70 10.0.0.26 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.71 10.0.0.27 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.72 10.0.0.28 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.73 10.0.0.29 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.74 10.0.0.23 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.75 10.0.0.30 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.76 10.0.0.31 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.77 10.0.0.32 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.78 10.0.0.33 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.79 10.0.0.34 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.80 10.0.0.35 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.81 10.0.0.36 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.82 10.0.0.37 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.83 192.168.0.29 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.84 192.168.0.30 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.85 10.0.0.38 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.86 10.0.0.39 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.87 192.168.0.23 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.88 10.0.0.40 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.89 10.0.0.41 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.90 10.0.0.42 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.91 192.168.0.31 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.92 10.0.0.43 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.93 10.0.0.44 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.94 10.0.0.45 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.95 10.0.0.46 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.96 192.168.0.32 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.97 192.168.0.33 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.98 192.168.0.34 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.99 192.168.0.35 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.100 192.168.0.36 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.101 192.168.0.37 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.102 192.168.0.38 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.103 192.168.0.39 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.104 192.168.0.40 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.105 10.0.0.47 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.106 10.0.0.48 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.107 10.0.0.49 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.108 192.168.0.41 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.109 192.168.0.42 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.110 10.0.0.50 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.111 10.0.0.51 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.112 10.0.0.52 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.113 10.0.0.53 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.114 10.0.0.54 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.115 10.0.0.55 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.116 10.0.0.56 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.117 10.0.0.57 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.118 10.0.0.58 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.119 192.168.0.43 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.120 192.168.0.44 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.121 192.168.0.45 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.122 192.168.0.46 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.123 10.0.0.59 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.124 10.0.0.60 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.125 192.168.0.43 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.126 10.0.0.61 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.127 10.0.0.62 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.128 192.0.2.129 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.130 192.0.2.131 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.132 10.0.0.63 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.133 192.168.0.47 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.134 192.168.0.48 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.135 10.0.0.64 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.136 10.0.0.65 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.137 10.0.0.66 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.138 192.168.0.49 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.139 192.168.0.50 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.140 192.168.0.51 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.141 10.0.0.67 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.142 10.0.0.68 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.143 10.0.0.69 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.144 10.0.0.70 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.145 10.0.0.71 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.146 10.0.0.72 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.147 10.0.0.73 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.148 10.0.0.74 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.149 10.0.0.75 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.150 10.0.0.76 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.151 10.0.0.77 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.152 10.0.0.78 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.153 10.0.0.79 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.154 10.0.0.80 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.155 10.0.0.81 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.156 192.0.2.156 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.157 192.0.2.157 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.158 192.0.2.158 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.159 10.0.0.82 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.160 192.0.2.160 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.161 192.0.2.161 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.162 192.0.2.162 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.163 192.0.2.163 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.164 192.0.2.164 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.165 192.0.2.165 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.166 192.0.2.166 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.167 192.0.2.167 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.168 192.0.2.168 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.169 10.0.0.83 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.170 192.0.2.170 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.171 192.0.2.171 netmask 255.255.192.0 0 0
+static (inside,outside) 192.0.2.172 192.0.2.172 netmask 255.255.255.0 0 0
+static (inside,outside) 192.0.2.173 192.0.2.173 netmask 255.255.255.0 0 0
+static (inside,outside) 192.0.2.174 192.0.2.174 netmask 255.255.255.224 0 0
+static (inside,outside) 192.0.2.175 192.0.2.175 netmask 255.255.255.0 0 0
+static (inside,outside) 192.0.2.176 192.0.2.176 netmask 255.255.255.192 0 0
+static (inside,outside) 192.0.2.177 192.0.2.177 netmask 255.255.255.0 0 0
+static (inside,outside) 192.0.2.178 192.0.2.178 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.179 192.0.2.179 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.180 192.0.2.180 netmask 255.255.255.224 0 0
+static (inside,outside) 192.0.2.61 192.0.2.61 netmask 255.255.255.0 0 0
+static (inside,outside) 192.0.2.181 10.0.0.84 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.182 10.0.0.85 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.183 10.0.0.86 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.184 10.0.0.87 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.185 10.0.0.88 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.186 192.0.2.186 netmask 255.255.255.0 0 0
+static (inside,outside) 192.0.2.187 10.0.0.89 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.188 10.0.0.90 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.189 10.0.0.91 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.190 10.0.0.92 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.191 10.0.0.93 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.192 10.0.0.94 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.193 10.0.0.95 netmask 255.255.255.255 0 0
+static (inside,outside) 192.0.2.194 10.0.0.96 netmask 255.255.255.255 0 0
+conduit permit tcp host 192.0.2.62 eq www any 
+conduit deny tcp host 192.0.2.62 any 
+conduit permit tcp host 192.0.2.23 eq www 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.23 gt 0 host 192.0.2.196 
+conduit permit tcp host 192.0.2.23 eq 0 host 192.0.2.197 
+conduit permit tcp host 192.0.2.23 eq www host 192.0.2.198 
+conduit permit tcp host 192.0.2.23 eq www host 192.0.2.199 
+conduit permit tcp host 192.0.2.23 eq www host 192.0.2.200 
+conduit permit tcp host 192.0.2.23 eq www host host-024 
+conduit permit tcp host 192.0.2.23 eq www host 192.0.2.201 
+conduit permit tcp host 192.0.2.23 eq www host 192.0.2.202 
+conduit permit tcp host 192.0.2.23 eq www host 192.0.2.203 
+conduit permit tcp host 192.0.2.23 eq www host 192.0.2.204 
+conduit permit tcp host 192.0.2.23 gt 0 host 192.0.2.205 
+conduit permit tcp host 192.0.2.23 gt 0 host 192.0.2.206 
+conduit permit tcp host 192.0.2.23 gt 0 host 192.0.2.207 
+conduit permit tcp host 192.0.2.23 gt 0 host 192.0.2.208 
+conduit permit tcp host 192.0.2.23 gt 0 host 192.0.2.209 
+conduit permit tcp host 192.0.2.23 gt 0 host 192.0.2.210 
+conduit permit tcp host 192.0.2.23 gt 0 host 192.0.2.211 
+conduit permit tcp host 192.0.2.23 gt 0 192.0.2.212 255.255.255.240 
+conduit deny tcp host 192.0.2.23 any 
+conduit permit tcp host 192.0.2.63 eq 8030 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.63 eq www 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.63 gt 0 host 192.0.2.196 
+conduit permit tcp host 192.0.2.63 gt 0 host 192.0.2.197 
+conduit permit tcp host 192.0.2.63 eq www host 192.0.2.198 
+conduit permit tcp host 192.0.2.63 eq www host 192.0.2.199 
+conduit permit tcp host 192.0.2.63 eq www host 192.0.2.200 
+conduit permit tcp host 192.0.2.63 eq www host host-024 
+conduit permit tcp host 192.0.2.63 eq www host 192.0.2.201 
+conduit permit tcp host 192.0.2.63 eq www host 192.0.2.202 
+conduit permit tcp host 192.0.2.63 eq www host 192.0.2.203 
+conduit permit tcp host 192.0.2.63 eq www host 192.0.2.204 
+conduit permit tcp host 192.0.2.63 gt 0 host 192.0.2.208 
+conduit permit tcp host 192.0.2.63 gt 0 192.0.2.212 255.255.255.240 
+conduit deny tcp host 192.0.2.63 any 
+conduit permit tcp host 192.0.2.64 eq 8030 any 
+conduit permit tcp host 192.0.2.64 eq 8037 any 
+conduit permit tcp host 192.0.2.64 eq 8070 any 
+conduit permit tcp host 192.0.2.64 eq www 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.64 eq 8029 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.64 eq 8020 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.64 eq 8030 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.64 eq 8037 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.64 eq 8070 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.64 eq 8032 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.64 eq 8050 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.64 eq 8080 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.64 eq 8100 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.64 eq 8033 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.64 eq 8065 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.64 gt 0 host 192.0.2.196 
+conduit permit tcp host 192.0.2.64 gt 0 host 192.0.2.197 
+conduit permit tcp host 192.0.2.64 gt 0 host 192.0.2.213 
+conduit permit tcp host 192.0.2.64 gt 0 host 192.0.2.198 
+conduit permit tcp host 192.0.2.64 gt 0 host 192.0.2.199 
+conduit permit tcp host 192.0.2.64 gt 0 host 192.0.2.200 
+conduit permit tcp host 192.0.2.64 gt 0 host 192.0.2.214 
+conduit permit tcp host 192.0.2.64 eq www host host-024 
+conduit permit tcp host 192.0.2.64 gt 0 host host-024 
+conduit permit udp host 192.0.2.64 gt 0 host host-024 
+conduit permit tcp host 192.0.2.64 gt 0 host 192.0.2.215 
+conduit permit tcp host 192.0.2.64 gt 0 host 192.0.2.201 
+conduit permit tcp host 192.0.2.64 gt 0 host 192.0.2.202 
+conduit permit tcp host 192.0.2.64 gt 0 host 192.0.2.203 
+conduit permit tcp host 192.0.2.64 gt 0 host 192.0.2.204 
+conduit permit tcp host 192.0.2.64 eq 8070 host 192.0.2.216 
+conduit permit tcp host 192.0.2.64 gt 0 host 192.0.2.205 
+conduit permit tcp host 192.0.2.64 gt 0 host 192.0.2.206 
+conduit permit tcp host 192.0.2.64 gt 0 host 192.0.2.207 
+conduit permit tcp host 192.0.2.64 gt 0 host 192.0.2.208 
+conduit permit tcp host 192.0.2.64 eq 8050 host 192.0.2.217 
+conduit permit tcp host 192.0.2.64 eq 8050 host 192.0.2.218 
+conduit permit tcp host 192.0.2.64 eq 8050 host 192.0.2.219 
+conduit permit tcp host 192.0.2.64 eq 8050 host 192.0.2.220 
+conduit permit tcp host 192.0.2.64 eq 8050 host 192.0.2.221 
+conduit permit tcp host 192.0.2.64 eq 8050 host 192.0.2.222 
+conduit permit tcp host 192.0.2.64 eq 8050 host 192.0.2.223 
+conduit permit tcp host 192.0.2.64 gt 0 host 192.0.2.209 
+conduit permit tcp host 192.0.2.64 eq 8029 host 192.0.2.209 
+conduit permit tcp host 192.0.2.64 gt 0 host 192.0.2.210 
+conduit permit tcp host 192.0.2.64 eq 8029 host 192.0.2.210 
+conduit permit tcp host 192.0.2.64 gt 0 host 192.0.2.211 
+conduit permit tcp host 192.0.2.64 eq 8029 host 192.0.2.211 
+conduit permit tcp host 192.0.2.64 gt 0 192.0.2.212 255.255.255.240 
+conduit permit tcp host 192.0.2.64 gt 0 host 192.0.2.224 
+conduit deny tcp host 192.0.2.64 any 
+conduit permit tcp host 192.0.2.65 eq telnet host 192.0.2.225 
+conduit permit tcp host 192.0.2.65 eq telnet host 192.0.2.213 
+conduit permit tcp host 192.0.2.65 eq telnet host host-023 
+conduit permit tcp host 192.0.2.65 eq telnet host 192.0.2.226 
+conduit deny tcp host 192.0.2.65 any 
+conduit permit tcp host 192.0.2.66 eq www any 
+conduit deny tcp host 192.0.2.66 any 
+conduit permit tcp host 192.0.2.67 eq www any 
+conduit deny tcp host 192.0.2.67 any 
+conduit permit tcp host 192.0.2.69 eq 8030 any 
+conduit permit tcp host 192.0.2.69 eq 8037 any 
+conduit permit tcp host 192.0.2.69 eq 8070 any 
+conduit permit tcp host 192.0.2.69 gt 0 host 192.0.2.196 
+conduit permit tcp host 192.0.2.69 eq www 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.69 eq 8030 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.69 eq 8050 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.69 eq 8070 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.69 eq 8032 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.69 eq 8029 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.69 eq 8080 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.69 eq 8100 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.69 eq 8037 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.69 eq 8033 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.69 eq 8020 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.69 eq 8065 192.0.2.195 255.255.0.0 
+conduit permit tcp host 192.0.2.69 gt 0 host 192.0.2.197 
+conduit permit tcp host 192.0.2.69 gt 0 host 192.0.2.214 
+conduit permit tcp host 192.0.2.69 eq www host host-024 
+conduit permit tcp host 192.0.2.69 gt 0 host host-024 
+conduit permit udp host 192.0.2.69 gt 0 host host-024 
+conduit permit tcp host 192.0.2.69 gt 0 host 192.0.2.215 
+conduit permit tcp host 192.0.2.69 gt 0 host 192.0.2.202 
+conduit permit tcp host 192.0.2.69 gt 0 host 192.0.2.203 
+conduit permit tcp host 192.0.2.69 gt 0 host 192.0.2.204 
+conduit permit tcp host 192.0.2.69 eq 8070 host 192.0.2.227 
+conduit permit tcp host 192.0.2.69 gt 0 host 192.0.2.205 
+conduit permit tcp host 192.0.2.69 gt 0 host 192.0.2.206 
+conduit permit tcp host 192.0.2.69 gt 0 host 192.0.2.207 
+conduit permit tcp host 192.0.2.69 gt 0 host 192.0.2.208 
+conduit permit tcp host 192.0.2.69 eq 8050 host 192.0.2.217 
+conduit permit tcp host 192.0.2.69 eq 8050 host 192.0.2.218 
+conduit permit tcp host 192.0.2.69 eq 8050 host 192.0.2.219 
+conduit permit tcp host 192.0.2.69 eq 8050 host 192.0.2.220 
+conduit permit tcp host 192.0.2.69 eq 8050 host 192.0.2.221 
+conduit permit tcp host 192.0.2.69 eq 8050 host 192.0.2.222 
+conduit permit tcp host 192.0.2.69 eq 8050 host 192.0.2.223 
+conduit permit tcp host 192.0.2.69 gt 0 192.0.2.228 192.0.2.229 
+conduit permit tcp host 192.0.2.69 gt 0 host 192.0.2.209 
+conduit permit tcp host 192.0.2.69 gt 0 host 192.0.2.210 
+conduit permit tcp host 192.0.2.69 gt 0 192.0.2.212 255.255.255.240 
+conduit permit tcp host 192.0.2.69 gt 0 host 192.0.2.224 
+conduit permit tcp host 192.0.2.69 eq 60000 any 
+conduit deny tcp host 192.0.2.69 any 
+conduit permit tcp host 192.0.2.83 eq www any 
+conduit permit tcp host 192.0.2.84 gt 0 host 192.0.2.230 
+conduit deny tcp host 192.0.2.84 any 
+conduit permit tcp host 192.0.2.96 eq www any 
+conduit deny tcp host 192.0.2.96 any 
+conduit permit tcp host 192.0.2.97 eq www any 
+conduit deny tcp host 192.0.2.97 any 
+conduit permit tcp host 192.0.2.98 eq www any 
+conduit deny tcp host 192.0.2.98 any 
+conduit permit tcp host 192.0.2.99 eq www any 
+conduit deny tcp host 192.0.2.99 any 
+conduit permit tcp host 192.0.2.100 eq www any 
+conduit deny tcp host 192.0.2.100 any 
+conduit permit tcp host 192.0.2.101 eq www any 
+conduit deny tcp host 192.0.2.101 any 
+conduit permit tcp host 192.0.2.102 eq www any 
+conduit deny tcp host 192.0.2.102 any 
+conduit permit tcp host 192.0.2.103 eq www any 
+conduit deny tcp host 192.0.2.103 any 
+conduit permit tcp host 192.0.2.106 gt 0 any 
+conduit deny tcp host 192.0.2.106 any 
+conduit permit tcp host 192.0.2.119 eq www any 
+conduit permit tcp host 192.0.2.119 eq 443 any 
+conduit deny tcp host 192.0.2.119 any 
+conduit permit tcp host 192.0.2.120 eq www any 
+conduit permit tcp host 192.0.2.120 eq 443 any 
+conduit deny tcp host 192.0.2.120 any 
+conduit permit tcp host 192.0.2.121 eq www any 
+conduit permit tcp host 192.0.2.121 eq 443 any 
+conduit deny tcp host 192.0.2.121 any 
+conduit permit tcp host 192.0.2.122 eq www any 
+conduit permit tcp host 192.0.2.122 eq 443 any 
+conduit deny tcp host 192.0.2.122 any 
+conduit permit tcp host 192.0.2.128 eq 1503 any 
+conduit permit tcp host 192.0.2.128 eq www any 
+conduit permit tcp host 192.0.2.128 eq 8080 any 
+conduit permit tcp host 192.0.2.128 eq 8081 any 
+conduit deny tcp host 192.0.2.128 any 
+conduit permit tcp host 192.0.2.130 eq www any 
+conduit deny tcp host 192.0.2.130 any 
+conduit permit tcp host 192.0.2.139 eq www host 192.0.2.231 
+conduit permit tcp host 192.0.2.139 eq 7070 host 192.0.2.231 
+conduit permit tcp host 192.0.2.139 eq www host 192.0.2.232 
+conduit permit tcp host 192.0.2.139 eq 7070 host 192.0.2.232 
+conduit permit tcp host 192.0.2.139 eq www host 192.0.2.233 
+conduit permit tcp host 192.0.2.139 eq 7070 host 192.0.2.233 
+conduit deny tcp host 192.0.2.139 any 
+conduit permit tcp host 192.0.2.140 eq www host 192.0.2.231 
+conduit permit tcp host 192.0.2.140 eq 7070 host 192.0.2.231 
+conduit permit tcp host 192.0.2.140 eq www host 192.0.2.232 
+conduit permit tcp host 192.0.2.140 eq 7070 host 192.0.2.232 
+conduit permit tcp host 192.0.2.140 eq www host 192.0.2.233 
+conduit permit tcp host 192.0.2.140 eq 7070 host 192.0.2.233 
+conduit deny tcp host 192.0.2.140 any 
+conduit permit tcp host 192.0.2.149 eq telnet host 192.0.2.234 
+conduit deny tcp host 192.0.2.235 any 
+conduit permit tcp host 192.0.2.158 gt 0 any 
+conduit deny tcp host 192.0.2.158 any 
+conduit permit tcp host 192.0.2.74 gt 0 192.0.2.195 255.255.0.0 
+conduit deny tcp host 192.0.2.74 any 
+conduit permit ip any any 
+no rip outside passive
+no rip outside default
+no rip inside passive
+no rip inside default
+route outside 0.0.0.0 0.0.0.0 host-023 1
+route inside 10.0.0.24 255.0.0.0 host-019 1
+route inside 192.168.0.25 255.255.0.0 host-019 1
+timeout xlate 0:30:00 conn 1:00:00 udp 0:10:00
+timeout rpc 0:10:00 h323 0:05:00
+timeout uauth 0:08:00 absolute
+snmp-server host inside 192.0.2.236
+no snmp-server location
+no snmp-server contact
+snmp-server community COMMUNITY_STRING
+snmp-server enable traps
+telnet host-019 255.255.255.255
+telnet 10.0.0.97 255.255.255.255
+telnet host-015 255.255.255.255
+telnet 192.168.0.23 255.255.255.255
+telnet 10.0.0.53 255.255.255.255
+telnet 10.0.0.95 255.255.255.255
+telnet 10.0.0.54 255.255.255.255
+telnet 192.0.2.236 255.255.255.255
+telnet 10.0.0.23 255.255.255.255
+telnet timeout 15
+mtu outside 1500
+mtu inside 1500
+floodguard 0
+sysopt security fragguard
+Cryptochecksum:0000000000000000000000000000000000000000
+fw-14#

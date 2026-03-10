@@ -1,0 +1,92 @@
+PIX Version 6.6(6)
+interface gb-ethernet0 1000sxfull
+interface gb-ethernet1 1000sxfull
+interface gb-ethernet1 vlan3 logical
+interface ethernet0 100full
+interface ethernet0 vlan5 logical
+nameif gb-ethernet0 outside security0
+nameif gb-ethernet1 inside security100
+nameif ethernet0 host-345 security50
+nameif vlan3 intf3 security15
+nameif vlan5 intf4 security20
+enable password XXXXXXXXXXXX encrypted
+passwd XXXXXXXXXXXX encrypted
+hostname fw-344
+domain-name example2.com
+fixup protocol ftp 21
+fixup protocol http 80
+fixup protocol h323 h225 1720
+fixup protocol h323 ras 1718-1719
+fixup protocol ils 389
+fixup protocol rsh 514
+fixup protocol rtsp 554
+fixup protocol smtp 25
+fixup protocol sqlnet 1521
+fixup protocol sip 5060
+fixup protocol skinny 2000
+fixup protocol sip udp 5060
+names
+name 10.0.2.225 host-345
+example8-list 100 permit icmp any any 
+pager lines 24
+logging timestamp
+logging facility 23
+no logging message 111008
+no logging message 111001
+mtu outside 1500
+mtu inside 1500
+mtu host-345 1500
+ip address outside 10.0.2.226 255.255.255.0
+ip address inside 10.0.2.227 255.255.255.0
+ip address host-345 10.0.2.228 255.255.255.0
+ip address intf3 127.0.0.1 255.255.255.255
+ip address intf4 127.0.0.1 255.255.255.255
+ip audit info action alarm
+ip audit attack action alarm
+no failover   
+failover timeout 0:00:00
+failover poll 15
+failover ip address outside 0.0.0.0
+failover ip address inside 0.0.0.0
+failover ip address host-345 0.0.0.0
+failover ip address intf3 0.0.0.0
+failover ip address intf4 0.0.0.0
+pdm location 10.0.2.229 255.255.255.255 host-345
+pdm location 203.0.113.86 255.255.255.0 inside
+pdm location 10.0.2.230 255.255.255.0 inside
+pdm location 10.0.2.231 255.255.255.0 host-345
+pdm location 10.0.2.232 255.255.255.255 inside
+pdm history enable
+arp timeout 14400
+global (outside) 1 interface
+nat (inside) 0 10.0.2.231 255.255.255.0 0 0
+example8-group 100 in interface outside
+route outside 0.0.0.0 0.0.0.0 10.0.2.233 1
+route inside 203.0.113.86 255.255.255.0 10.0.2.234 1
+timeout xlate 3:00:00
+timeout conn 1:00:00 half-closed 0:10:00 udp 0:20:00 rpc 0:10:00 h225 1:00:00
+timeout h323 0:05:00 mgcp 0:05:00 sip 0:30:00 sip_media 0:02:00
+timeout uauth 0:05:00 absolute
+aaa-server TACACS+ protocol tacacs+ 
+aaa-server TACACS+ (inside) host 10.0.2.232 root timeout 5
+aaa-server RADIUS protocol radius 
+aaa-server LOCAL protocol local 
+http server enable
+http 10.0.2.231 255.255.255.0 inside
+http 10.0.2.230 255.255.255.0 inside
+snmp-server host host-345 10.0.2.229
+no snmp-server location
+no snmp-server contact
+snmp-server community COMMUNITY_STRING
+no snmp-server enable traps
+no floodguard enable
+telnet 10.0.2.231 255.255.255.0 inside
+telnet 10.0.2.231 255.255.255.0 host-345
+telnet timeout 60
+ssh timeout 5
+console timeout 0
+url-block url-mempool 10240
+terminal width 80
+Cryptochecksum:0000000000000000000000000000000000000000
+: end
+[OK]

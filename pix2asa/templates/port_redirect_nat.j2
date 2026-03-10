@@ -1,0 +1,3 @@
+object network {{ obj_name }}
+ host {{ int_ip }}
+ nat ({{ src_if }},{{ dst_if }}) static {{ ext_addr }} service {{ proto }} {{ ext_port }} {{ int_port }}

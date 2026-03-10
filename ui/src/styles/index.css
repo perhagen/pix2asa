@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-100 text-gray-900;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+}
+
+@layer components {
+  .panel {
+    @apply bg-white border border-gray-300 rounded p-4 mb-4 shadow-sm;
+  }
+  .panel-title {
+    @apply text-sm font-bold text-gray-600 uppercase tracking-wide mb-3 border-b border-gray-200 pb-1;
+  }
+  .form-label {
+    @apply text-sm font-medium text-gray-700 text-right;
+  }
+  .form-input {
+    @apply border border-gray-300 rounded px-2 py-1 text-sm w-full focus:outline-none focus:ring-1 focus:ring-blue-500;
+  }
+  .btn {
+    @apply px-3 py-1.5 text-sm font-medium rounded border cursor-pointer transition-colors;
+  }
+  .btn-primary {
+    @apply btn bg-blue-600 text-white border-blue-700 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-secondary {
+    @apply btn bg-gray-100 text-gray-800 border-gray-300 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .config-area {
+    @apply font-mono text-xs border border-gray-300 rounded p-2 w-full resize-none bg-gray-50 focus:outline-none focus:ring-1 focus:ring-blue-500;
+  }
+}

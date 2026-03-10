@@ -1,0 +1,177 @@
+{
+  "source_devices": [
+    {"family": "PIX", "model": 501, "type_name": "PIX501", "max_vlans": 0,
+     "slot_type": "PIX501", "card_slots": [0]},
+    {"family": "PIX", "model": 506, "type_name": "PIX506", "max_vlans": 2,
+     "slot_type": "PIX506", "card_slots": [0]},
+    {"family": "PIX", "model": 515, "type_name": "PIX515", "max_vlans": 25,
+     "slot_type": "PCI66", "card_slots": [0, 1]},
+    {"family": "PIX", "model": 520, "type_name": "PIX520", "max_vlans": 0,
+     "slot_type": "PIX520", "card_slots": [0]},
+    {"family": "PIX", "model": 525, "type_name": "PIX525", "max_vlans": 100,
+     "slot_type": "PCI66", "card_slots": [0, 1, 2, 3]},
+    {"family": "PIX", "model": 535, "type_name": "PIX535", "max_vlans": 150,
+     "slot_types": ["PCI33", "PCI66"], "card_slots": [0,1,2,3,4,5,6,7,8,9]}
+  ],
+  "target_devices": [
+    {
+      "slug": "asa-5505",
+      "display_name": "ASA 5505 with base license",
+      "family": "ASA", "model": 5505, "max_vlans": 3,
+      "min_asa_version": "7.2.2",
+      "switchport_prefix": "Ethernet",
+      "interfaces": ["vlan2", "vlan1", "vlan3"]
+    },
+    {
+      "slug": "asa-5505-plus",
+      "display_name": "ASA 5505 with plus license",
+      "family": "ASA", "model": 5505, "max_vlans": 20,
+      "min_asa_version": "7.2.2",
+      "switchport_prefix": "Ethernet",
+      "interfaces": ["vlan2", "vlan1", "vlan3", "vlan4", "vlan5", "vlan6", "vlan7", "vlan8"]
+    },
+    {
+      "slug": "asa-5510",
+      "display_name": "ASA 5510 (base license, before 7.2(2))",
+      "family": "ASA", "model": 5510, "max_vlans": 50,
+      "min_asa_version": "7.0", "max_asa_version": "7.2.1",
+      "interfaces": ["Ethernet0/0", "Ethernet0/1", "Ethernet0/2", "Ethernet0/3"]
+    },
+    {
+      "slug": "asa-5510-8ge",
+      "display_name": "ASA 5510 with SSM-4GE",
+      "family": "ASA", "model": 5510, "max_vlans": 100,
+      "min_asa_version": "7.2.2",
+      "interfaces": [
+        "Ethernet0/0", "Ethernet0/1", "Ethernet0/2", "Ethernet0/3",
+        "GigabitEthernet1/0", "GigabitEthernet1/1", "GigabitEthernet1/2", "GigabitEthernet1/3"
+      ]
+    },
+    {
+      "slug": "asa-5520",
+      "display_name": "ASA 5520",
+      "family": "ASA", "model": 5520, "max_vlans": 150,
+      "min_asa_version": "7.0",
+      "interfaces": [
+        "GigabitEthernet0/0", "GigabitEthernet0/1",
+        "GigabitEthernet0/2", "GigabitEthernet0/3"
+      ]
+    },
+    {
+      "slug": "asa-5520-8ge",
+      "display_name": "ASA 5520 with SSM-4GE",
+      "family": "ASA", "model": 5520, "max_vlans": 150,
+      "min_asa_version": "7.2.2",
+      "interfaces": [
+        "GigabitEthernet0/0", "GigabitEthernet0/1", "GigabitEthernet0/2", "GigabitEthernet0/3",
+        "GigabitEthernet1/0", "GigabitEthernet1/1", "GigabitEthernet1/2", "GigabitEthernet1/3"
+      ]
+    },
+    {
+      "slug": "asa-5540",
+      "display_name": "ASA 5540",
+      "family": "ASA", "model": 5540, "max_vlans": 200,
+      "min_asa_version": "7.0",
+      "interfaces": [
+        "GigabitEthernet0/0", "GigabitEthernet0/1",
+        "GigabitEthernet0/2", "GigabitEthernet0/3"
+      ]
+    },
+    {
+      "slug": "asa-5540-8ge",
+      "display_name": "ASA 5540 with SSM-4GE",
+      "family": "ASA", "model": 5540, "max_vlans": 200,
+      "min_asa_version": "7.2.2",
+      "interfaces": [
+        "GigabitEthernet0/0", "GigabitEthernet0/1", "GigabitEthernet0/2", "GigabitEthernet0/3",
+        "GigabitEthernet1/0", "GigabitEthernet1/1", "GigabitEthernet1/2", "GigabitEthernet1/3"
+      ]
+    },
+    {
+      "slug": "asa-5550",
+      "display_name": "ASA 5550",
+      "family": "ASA", "model": 5550, "max_vlans": 250,
+      "min_asa_version": "7.2.2",
+      "interfaces": [
+        "GigabitEthernet0/0", "GigabitEthernet0/1", "GigabitEthernet0/2", "GigabitEthernet0/3",
+        "GigabitEthernet1/0", "GigabitEthernet1/1", "GigabitEthernet1/2", "GigabitEthernet1/3"
+      ]
+    },
+    {
+      "slug": "asa-5580-4ge",
+      "display_name": "ASA 5580 (1 x 4-GE card)",
+      "family": "ASA", "model": 5580, "max_vlans": 250,
+      "min_asa_version": "8.1",
+      "interfaces": [
+        "GigabitEthernet3/0", "GigabitEthernet3/1", "GigabitEthernet3/2", "GigabitEthernet3/3"
+      ]
+    },
+    {
+      "slug": "asa-5580-8ge",
+      "display_name": "ASA 5580 (2 x 4-GE cards)",
+      "family": "ASA", "model": 5580, "max_vlans": 250,
+      "min_asa_version": "8.1",
+      "interfaces": [
+        "GigabitEthernet3/0", "GigabitEthernet3/1", "GigabitEthernet3/2", "GigabitEthernet3/3",
+        "GigabitEthernet4/0", "GigabitEthernet4/1", "GigabitEthernet4/2", "GigabitEthernet4/3"
+      ]
+    },
+    {
+      "slug": "asa-5580-12ge",
+      "display_name": "ASA 5580 (3 x 4-GE cards)",
+      "family": "ASA", "model": 5580, "max_vlans": 250,
+      "min_asa_version": "8.1",
+      "interfaces": [
+        "GigabitEthernet3/0", "GigabitEthernet3/1", "GigabitEthernet3/2", "GigabitEthernet3/3",
+        "GigabitEthernet4/0", "GigabitEthernet4/1", "GigabitEthernet4/2", "GigabitEthernet4/3",
+        "GigabitEthernet6/0", "GigabitEthernet6/1", "GigabitEthernet6/2", "GigabitEthernet6/3"
+      ]
+    },
+    {
+      "slug": "asa-5580-16ge",
+      "display_name": "ASA 5580 (4 x 4-GE cards)",
+      "family": "ASA", "model": 5580, "max_vlans": 250,
+      "min_asa_version": "8.1",
+      "interfaces": [
+        "GigabitEthernet3/0", "GigabitEthernet3/1", "GigabitEthernet3/2", "GigabitEthernet3/3",
+        "GigabitEthernet4/0", "GigabitEthernet4/1", "GigabitEthernet4/2", "GigabitEthernet4/3",
+        "GigabitEthernet6/0", "GigabitEthernet6/1", "GigabitEthernet6/2", "GigabitEthernet6/3",
+        "GigabitEthernet5/0", "GigabitEthernet5/1", "GigabitEthernet5/2", "GigabitEthernet5/3"
+      ]
+    },
+    {
+      "slug": "asa-5580-20ge",
+      "display_name": "ASA 5580 (5 x 4-GE cards)",
+      "family": "ASA", "model": 5580, "max_vlans": 250,
+      "min_asa_version": "8.1",
+      "interfaces": [
+        "GigabitEthernet3/0", "GigabitEthernet3/1", "GigabitEthernet3/2", "GigabitEthernet3/3",
+        "GigabitEthernet4/0", "GigabitEthernet4/1", "GigabitEthernet4/2", "GigabitEthernet4/3",
+        "GigabitEthernet6/0", "GigabitEthernet6/1", "GigabitEthernet6/2", "GigabitEthernet6/3",
+        "GigabitEthernet5/0", "GigabitEthernet5/1", "GigabitEthernet5/2", "GigabitEthernet5/3",
+        "GigabitEthernet7/0", "GigabitEthernet7/1", "GigabitEthernet7/2", "GigabitEthernet7/3"
+      ]
+    },
+    {
+      "slug": "asa-5580-24ge",
+      "display_name": "ASA 5580 (6 x 4-GE cards)",
+      "family": "ASA", "model": 5580, "max_vlans": 250,
+      "min_asa_version": "8.1",
+      "interfaces": [
+        "GigabitEthernet3/0", "GigabitEthernet3/1", "GigabitEthernet3/2", "GigabitEthernet3/3",
+        "GigabitEthernet4/0", "GigabitEthernet4/1", "GigabitEthernet4/2", "GigabitEthernet4/3",
+        "GigabitEthernet6/0", "GigabitEthernet6/1", "GigabitEthernet6/2", "GigabitEthernet6/3",
+        "GigabitEthernet5/0", "GigabitEthernet5/1", "GigabitEthernet5/2", "GigabitEthernet5/3",
+        "GigabitEthernet7/0", "GigabitEthernet7/1", "GigabitEthernet7/2", "GigabitEthernet7/3",
+        "GigabitEthernet8/0", "GigabitEthernet8/1", "GigabitEthernet8/2", "GigabitEthernet8/3"
+      ]
+    },
+    {
+      "slug": "custom",
+      "display_name": "Custom (explicit interface mapping)",
+      "family": "ASA", "model": 0, "max_vlans": 0,
+      "min_asa_version": "7.0",
+      "interfaces": []
+    }
+  ]
+}
